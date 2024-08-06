@@ -1,7 +1,8 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:vacancy_admin/theme/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vacancy_admin/theme/theme.dart';
 
 class Utils {
   static Future urlLauncher(url) async {
@@ -30,14 +31,15 @@ class Utils {
     return null;
   }
 
-  static void toastMessage({required String message}) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: AppTheme.greyColor,
-        textColor: AppTheme.darkGrey,
-        fontSize: 16.0);
+  static void toastMessage(
+      {required String message, required BuildContext context}) {
+    Flushbar(
+      title: " ",
+     
+      backgroundColor: AppTheme.greyColor,messageText: Text(message,style: GoogleFonts.kanit(color: AppTheme.darkGrey,fontWeight: FontWeight.bold,),),
+      messageSize: 15,
+      titleSize: 0,
+      duration: const Duration(seconds: 3),
+    ).show(context);
   }
 }

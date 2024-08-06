@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:vacancy_admin/reusablewidgets/multicolor_progress_indicator.dart';
+import 'package:vacancy_admin/reusablewidgets/neomorphism_widget.dart';
+import 'package:vacancy_admin/screens/detailscreen/detail_screen.dart';
 import 'package:vacancy_admin/theme/theme.dart';
+import 'package:vacancy_admin/utils/utils.dart';
 
 class SummaryScreen extends StatelessWidget {
   const SummaryScreen({super.key});
@@ -11,7 +15,6 @@ class SummaryScreen extends StatelessWidget {
         FirebaseFirestore.instance.collection('vacancies').snapshots();
 
     return Scaffold(
-      backgroundColor: AppTheme.whiteColor,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppTheme.blueColor,
@@ -26,10 +29,6 @@ class SummaryScreen extends StatelessWidget {
       body: StreamBuilder<QuerySnapshot>(
         stream: fireStoreStream,
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
           var data = snapshot.data!.docs;
 
           int totalApproved = data.fold(
@@ -44,6 +43,35 @@ class SummaryScreen extends StatelessWidget {
               0,
               (totalVacantData, doc) =>
                   totalVacantData + (int.parse(doc['vacancy'])));
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: MulticolorProgressIndicator(),
+            );
+          }
+
+          if (snapshot.hasError) {
+            Center(
+              child: Text(
+                'Something went wrong',
+                style: Theme.of(context)
+                    .textTheme
+                    .displayLarge!
+                    .copyWith(fontWeight: FontWeight.normal),
+              ),
+            );
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            Center(
+              child: Text(
+                'No data available',
+                style: Theme.of(context)
+                    .textTheme
+                    .displayLarge!
+                    .copyWith(fontWeight: FontWeight.normal),
+              ),
+            );
+          }
 
           return LayoutBuilder(
             builder: (context, constraints) {
@@ -65,91 +93,114 @@ class SummaryScreen extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
-                          child: DataTable(
-                            border: TableBorder.all(
-                              color: AppTheme.whiteColor,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            columnSpacing: columnSpacing,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20)),
-                            headingRowColor: WidgetStateColor.resolveWith(
-                                (states) => AppTheme.blueColor),
-                            headingTextStyle:
-                                Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      color: AppTheme.whiteColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: headingFontSize,
-                                    ),
-                            dataTextStyle: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: fontSize,
-                                ),
-                            columns: const [
-                              DataColumn(
-                                  label: FittedBox(child: Text('Department'))),
-                              DataColumn(
-                                  label: Expanded(
-                                      child:
-                                          FittedBox(child: Text('Approved')))),
-                              DataColumn(
-                                  label: Expanded(
-                                      child:
-                                          FittedBox(child: Text('Current')))),
-                              DataColumn(
-                                  label: Expanded(
-                                      child: FittedBox(child: Text('Vacant')))),
-                            ],
-                            rows: [
-                              ...data.map((doc) {
-                                return DataRow(
+                          child: NeomorphicWidget(
+                            child: DataTable(
+                              border: TableBorder.all(
+                                color: AppTheme.lightGreyColor,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              columnSpacing: columnSpacing,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20)),
+                              headingRowColor: WidgetStateColor.resolveWith(
+                                  (states) => AppTheme.blueColor),
+                              headingTextStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    color: AppTheme.whiteColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: headingFontSize,
+                                  ),
+                              dataTextStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: fontSize,
+                                  ),
+                              columns: const [
+                                DataColumn(
+                                    label:
+                                        FittedBox(child: Text('Department'))),
+                                DataColumn(
+                                    label: Expanded(
+                                        child: FittedBox(
+                                            child: Text('Approved')))),
+                                DataColumn(
+                                    label: Expanded(
+                                        child:
+                                            FittedBox(child: Text('Current')))),
+                                DataColumn(
+                                    label: Expanded(
+                                        child:
+                                            FittedBox(child: Text('Vacant')))),
+                              ],
+                              rows: [
+                                ...data.map((doc) {
+                                  return DataRow(
+                                    onLongPress: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailScreen(
+                                                      department:
+                                                          doc['department'],
+                                                      approvedNumbers: doc[
+                                                          'approved_numbers'],
+                                                      manpowerNumbers: doc[
+                                                          'manpower_numbers'],
+                                                      vacancy: doc['vacancy'],
+                                                      number: doc['number'],
+                                                      snapshot: snapshot,
+                                                      docId: doc.id)));
+                                    },
+                                    cells: [
+                                      DataCell(FittedBox(
+                                          child: Text(
+                                              doc['department'].toString()))),
+                                      DataCell(FittedBox(
+                                          child: Text(doc['approved_numbers']
+                                              .toString()))),
+                                      DataCell(FittedBox(
+                                          child: Text(doc['manpower_numbers']
+                                              .toString()))),
+                                      DataCell(FittedBox(
+                                          child:
+                                              Text(doc['vacancy'].toString()))),
+                                    ],
+                                  );
+                                }),
+                                DataRow(
                                   cells: [
+                                    const DataCell(FittedBox(
+                                        child: Text(
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            'Total'))),
                                     DataCell(FittedBox(
                                         child: Text(
-                                            doc['department'].toString()))),
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            totalApproved.toString()))),
                                     DataCell(FittedBox(
-                                        child: Text(doc['approved_numbers']
-                                            .toString()))),
+                                        child: Text(
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            totalManpower.toString()))),
                                     DataCell(FittedBox(
-                                        child: Text(doc['manpower_numbers']
-                                            .toString()))),
-                                    DataCell(FittedBox(
-                                        child:
-                                            Text(doc['vacancy'].toString()))),
+                                        child: Text(
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            totalVacant.toString()))),
                                   ],
-                                );
-                              }),
-                              DataRow(
-                                cells: [
-                                  const DataCell(FittedBox(
-                                      child: Text(
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                          'Total'))),
-                                  DataCell(FittedBox(
-                                      child: Text(
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                          totalApproved.toString()))),
-                                  DataCell(FittedBox(
-                                      child: Text(
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                          totalManpower.toString()))),
-                                  DataCell(FittedBox(
-                                      child: Text(
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                          totalVacant.toString()))),
-                                ],
-                              ),
-                            ],
-                            dividerThickness: 1,
-                            horizontalMargin: 20,
+                                ),
+                              ],
+                              dividerThickness: 1,
+                              horizontalMargin: 20,
+                            ),
                           ),
                         ),
                       ),

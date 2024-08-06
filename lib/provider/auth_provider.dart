@@ -26,10 +26,10 @@ class AuthProvider extends ChangeNotifier {
           ),
         );
       } else {
-        Utils.toastMessage(message: 'Please provide correct password');
+        Utils.toastMessage(message: 'Please provide correct password', context: context);
       }
     } catch (e) {
-      Utils.toastMessage(message: e.toString());
+      Utils.toastMessage(message: e.toString(), context: context);
     } finally {
       setLoading(false);
     }

@@ -27,7 +27,8 @@ class ReusableTextField extends StatelessWidget {
       this.suffix,
       this.onFieldSubmitted,
       this.validator,
-      this.maxLines = 1, this.inputFormatter});
+      this.maxLines = 1,
+      this.inputFormatter});
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +47,18 @@ class ReusableTextField extends StatelessWidget {
           focusNode: focusNode,
           cursorColor: AppTheme.darkGrey,
           decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            labelText: hintText,
+            labelStyle: GoogleFonts.kanit(color: AppTheme.darkGrey),
             hintStyle: GoogleFonts.kanit(),
             suffixIcon: suffix,
             prefixIcon: prefix,
             hintText: hintText,
             filled: true,
             fillColor: AppTheme.greyColor,
+            hoverColor: AppTheme.lightGreyColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide.none,

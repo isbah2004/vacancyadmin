@@ -22,13 +22,11 @@ class _UpdateFileState extends State<UpdateFile> {
   late TextEditingController approvedNumberController;
   late TextEditingController manpowerNumberController;
   late TextEditingController vacancyController;
-  late TextEditingController detailController;
   late TextEditingController numberController;
   final FocusNode departmentFocusNode = FocusNode();
   final FocusNode approvedNumberFocusNode = FocusNode();
   final FocusNode manpowerNumberFocusNode = FocusNode();
   final FocusNode vacancyFocusNode = FocusNode();
-  final FocusNode detailFocusNode = FocusNode();
   final FocusNode numberFocusNode = FocusNode();
 
   @override
@@ -38,7 +36,6 @@ class _UpdateFileState extends State<UpdateFile> {
     approvedNumberController = TextEditingController(text: widget.existingData['approved_numbers']);
     manpowerNumberController = TextEditingController(text: widget.existingData['manpower_numbers']);
     vacancyController = TextEditingController(text: widget.existingData['vacancy']);
-    detailController = TextEditingController(text: widget.existingData['details']);
     numberController = TextEditingController(text: widget.existingData['number']); approvedNumberController.addListener(computeAvailableVacancies);
     manpowerNumberController.addListener(computeAvailableVacancies);
     // Compute available vacancies after initializing the controllers
@@ -61,13 +58,11 @@ class _UpdateFileState extends State<UpdateFile> {
     approvedNumberController.dispose();
     manpowerNumberController.dispose();
     vacancyController.dispose();
-    detailController.dispose();
     numberController.dispose();
     departmentFocusNode.dispose();
     approvedNumberFocusNode.dispose();
     manpowerNumberFocusNode.dispose();
     vacancyFocusNode.dispose();
-    detailFocusNode.dispose();
     numberFocusNode.dispose();
     super.dispose();
   }
@@ -147,21 +142,6 @@ class _UpdateFileState extends State<UpdateFile> {
               onFieldSubmitted: (value) {
                 Utils.changeFocus(
                     currentFocus: vacancyFocusNode,
-                    nextFocus: detailFocusNode,
-                    context: context);
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ReusableTextField(maxLines: null,
-              hintText: 'Details',
-              controller: detailController,
-              keyboardType: TextInputType.text,
-              focusNode: detailFocusNode,
-              onFieldSubmitted: (value) {
-                Utils.changeFocus(
-                    currentFocus: detailFocusNode,
                     nextFocus: numberFocusNode,
                     context: context);
               },
@@ -169,6 +149,7 @@ class _UpdateFileState extends State<UpdateFile> {
             const SizedBox(
               height: 20,
             ),
+    
             ReusableTextField(
               hintText: 'Number',
               controller: numberController,  keyboardType: TextInputType.number,
@@ -191,7 +172,6 @@ class _UpdateFileState extends State<UpdateFile> {
                           approvedNumberController: approvedNumberController,
                           manpowerNumberController: manpowerNumberController,
                           vacancyController: vacancyController,
-                          detailController: detailController,
                           numberController: numberController);
                     },
                     loading: value.loading);

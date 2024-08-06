@@ -6,10 +6,11 @@ class AppTheme {
   static const Color redColor = Color(0xFFec1923);
   static const Color whiteColor = Color(0xFFF8F8FF);
   static const Color blueColor = Color(0xFF3072FF);
-  static const Color hintColor = Colors.grey;
-  static final Color greyColor = Colors.grey[300]!;
-  static final Color lightBlue = Colors.blue[100]!;
-  static final Color darkGrey = Colors.grey[700]!;
+  static const Color hintColor = Color(0xFF9E9E9E);
+  static const Color greyColor = Color(0xFFE0E0E0);
+  static const Color lightGreyColor = Color(0xFFD3D3D3);
+  static const Color lightBlue = Color(0xFFBBDEFB);
+  static const Color darkGrey = Color(0xFF616161);
 
   static final TextStyle labelLarge = GoogleFonts.kanit(
       color: darkGrey, fontSize: 16.0, fontWeight: FontWeight.bold);

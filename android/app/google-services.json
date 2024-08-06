@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "716530752125",
-    "project_id": "exam-app-dfbb9",
-    "storage_bucket": "exam-app-dfbb9.appspot.com"
+    "project_number": "84909805505",
+    "project_id": "lcpl-manpower-and-vacancy",
+    "storage_bucket": "lcpl-manpower-and-vacancy.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:716530752125:android:f4d411ae77f2560bfc2f14",
+        "mobilesdk_app_id": "1:84909805505:android:229ab14fcfbe1c25082940",
         "android_client_info": {
           "package_name": "com.example.vacancy_admin"
         }
@@ -15,45 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAFCDKG9szBe5s1XIqJpTVJ4wQx6Y103Uo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:716530752125:android:b502734cc0c2166dfc2f14",
-        "android_client_info": {
-          "package_name": "com.lottechem.lcpladmin"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAFCDKG9szBe5s1XIqJpTVJ4wQx6Y103Uo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:716530752125:android:627ac84667a60a5cfc2f14",
-        "android_client_info": {
-          "package_name": "com.lottechem.vacancyapp"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAFCDKG9szBe5s1XIqJpTVJ4wQx6Y103Uo"
+          "current_key": "AIzaSyCcUUZUelLKZAUCg7PGyQa39nrAPWlr-tk"
         }
       ],
       "services": {

@@ -1,23 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:vacancy_admin/provider/upload_provider.dart';
+import 'package:vacancy_admin/reusablewidgets/multicolor_progress_indicator.dart';
 import 'package:vacancy_admin/reusablewidgets/neomorphism_widget.dart';
+import 'package:vacancy_admin/reusablewidgets/reusable_button.dart';
+import 'package:vacancy_admin/screens/postscreens/add_table.dart';
+import 'package:vacancy_admin/screens/postscreens/update_table.dart';
 import 'package:vacancy_admin/theme/theme.dart';
+import 'package:vacancy_admin/utils/utils.dart';
 
 class DetailScreen extends StatefulWidget {
   final String department,
       approvedNumbers,
       manpowerNumbers,
       vacancy,
-      detail,
-      number;
+      number,
+      docId;
+  final AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
   const DetailScreen({
     super.key,
     required this.department,
     required this.approvedNumbers,
     required this.manpowerNumbers,
     required this.vacancy,
-    required this.detail,
     required this.number,
+    required this.snapshot,
+    required this.docId,
   });
 
   @override
@@ -27,6 +37,8 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> fireStoreStream =
+        FirebaseFirestore.instance.collection(widget.department).snapshots();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -66,13 +78,173 @@ class _DetailScreenState extends State<DetailScreen> {
                         buildDetailField('Vacancy:', widget.vacancy),
                         const SizedBox(height: 20),
                         buildDetailField('Number:', widget.number),
-                        const SizedBox(height: 20),
-                        buildDetailField('Details:', widget.detail),
                       ],
                     ),
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 30,
+              ),
+              StreamBuilder<QuerySnapshot>(
+                stream: fireStoreStream,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: MulticolorProgressIndicator(),
+                    );
+                  }
+
+                  if (snapshot.hasError) {
+                    Utils.toastMessage(
+                        message: snapshot.error.toString(), context: context);
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return const SizedBox();
+                  }
+
+                  var data = snapshot.data!.docs;
+                  return LayoutBuilder(
+                    builder: (context, constraints) {
+                      double fontSize = constraints.maxWidth < 600 ? 13 : 15;
+                      double headingFontSize =
+                          constraints.maxWidth < 600 ? 13 : 15;
+                      double columnSpacing =
+                          constraints.maxWidth < 600 ? 10 : 20;
+
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: NeomorphicWidget(
+                                    child: Consumer<UploadProvider>(
+                                      builder: (BuildContext context,
+                                          UploadProvider value, Widget? child) {
+                                        return DataTable(
+                                          border: TableBorder.all(
+                                            color: AppTheme.lightGreyColor,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          columnSpacing: columnSpacing,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          headingRowColor:
+                                              WidgetStateColor.resolveWith(
+                                                  (states) =>
+                                                      AppTheme.blueColor),
+                                          headingTextStyle: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge!
+                                              .copyWith(
+                                                color: AppTheme.whiteColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: headingFontSize,
+                                              ),
+                                          dataTextStyle: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: fontSize,
+                                              ),
+                                          columns: const [
+                                            DataColumn(
+                                                label: FittedBox(
+                                                    child: Text('Name'))),
+                                            DataColumn(
+                                                label: Expanded(
+                                                    child: FittedBox(
+                                                        child: Text(
+                                                            'Resignation Date')))),
+                                            DataColumn(
+                                                label: Expanded(
+                                                    child: FittedBox(
+                                                        child: Text(
+                                                            'Designation')))),
+                                            DataColumn(
+                                                label: Expanded(
+                                                    child: FittedBox(
+                                                        child: Text('Grade')))),
+                                          ],
+                                          rows: [
+                                            ...data.map((doc) {
+                                              return DataRow(
+                                                onLongPress: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              UpdateTable(
+                                                                  docId: doc.id,
+                                                                  existingData:
+                                                                      doc,
+                                                                  collectionName:
+                                                                      widget
+                                                                          .department)));
+                                                },
+                                                cells: [
+                                                  DataCell(FittedBox(
+                                                      child: Text(doc['name']
+                                                          .toString()))),
+                                                  DataCell(FittedBox(
+                                                      child: Text(doc['date']
+                                                          .toString()))),
+                                                  DataCell(FittedBox(
+                                                      child: Text(
+                                                          doc['designation']
+                                                              .toString()))),
+                                                  DataCell(FittedBox(
+                                                      child: Text(doc['grade']
+                                                          .toString()))),
+                                                ],
+                                              );
+                                            }),
+                                          ],
+                                          dividerThickness: 1,
+                                          horizontalMargin: 20,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ReusableButton(
+                  title: 'Add Table',
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddTable(
+                                  docId: widget.docId,
+                                  departmentName: widget.department,
+                                )));
+                  },
+                  loading: false)
             ],
           ),
         ),

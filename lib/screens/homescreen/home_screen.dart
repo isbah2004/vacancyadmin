@@ -24,38 +24,37 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.whiteColor,
-      appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            'Current Manpower Status and Vacancy Overview',
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: AppTheme.whiteColor,
-                fontSize: 25,
-                fontWeight: FontWeight.bold),
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SummaryScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.summarize))
-          ]),
-      body: Column(
-        children: [
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: fireStoreStream,
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Padding(
+        backgroundColor: AppTheme.whiteColor,
+        appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              'Current Manpower Status and Vacancy Overview',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppTheme.whiteColor,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SummaryScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.summarize))
+            ]),
+        body: Column(
+          children: [
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: fireStoreStream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Padding(
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height / 2.6),
                       child: Center(
@@ -67,21 +66,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               .copyWith(fontWeight: FontWeight.normal),
                         ),
                       ),
-                    ),
-                  );
-                } else if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 2.6),
-                    child: const Center(child: CircularProgressIndicator()),
-                  );
-                } else if (snapshot.data == null ||
-                    snapshot.data!.docs.isEmpty) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 2.6),
-                    child: Center(
+                    );
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 2.6),
+                      child: const Center(child: CircularProgressIndicator()),
+                    );
+                  } else if (snapshot.data == null ||
+                      snapshot.data!.docs.isEmpty) {
+                    return Center(
                       child: Text(
                         'No data available',
                         style: Theme.of(context)
@@ -89,145 +84,138 @@ class _HomeScreenState extends State<HomeScreen> {
                             .displayLarge!
                             .copyWith(fontWeight: FontWeight.normal),
                       ),
-                    ),
-                  );
-                }
+                    );
+                  }
 
-                return ListView(
-                  children: snapshot.data!.docs.map(
-                    (DocumentSnapshot document) {
-                      Map<String, dynamic> data =
-                          document.data()! as Map<String, dynamic>;
+                  return ListView(
+                    children: snapshot.data!.docs.map(
+                      (DocumentSnapshot document) {
+                        Map<String, dynamic> data =
+                            document.data()! as Map<String, dynamic>;
 
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 14, horizontal: 8),
-                        child: NeomorphicWidget(
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailScreen(
-                                      department: data['department'],
-                                      approvedNumbers: data['approved_numbers'],
-                                      manpowerNumbers: data['manpower_numbers'],
-                                      vacancy: data['vacancy'],
-                                      detail: data['details'],
-                                      number: data['number']),
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 14, horizontal: 8),
+                          child: NeomorphicWidget(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailScreen(department: data['department'], approvedNumbers: data['approved_numbers'], manpowerNumbers: data['manpower_numbers'], vacancy: data['vacancy'], number: data['number'], snapshot: snapshot, docId: document.id)
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color: AppTheme.greyColor),
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        const SizedBox(
+                                          height: 25,
+                                          width: 25,
+                                          child: Image(
+                                            image: AssetImage(
+                                                Constants.jobSearchImage),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(data['department'].toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge!
+                                                .copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                )),
+                                      ],
+                                    ),
+                                    Consumer<UploadProvider>(
+                                      builder: (BuildContext context,
+                                          UploadProvider value, Widget? child) {
+                                        return PopupMenuButton(
+                                          color: AppTheme.greyColor,
+                                          elevation: 4,
+                                          padding: EdgeInsets.zero,
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(12))),
+                                          icon: const Icon(
+                                            Icons.more_vert,
+                                          ),
+                                          itemBuilder: (context) => [
+                                            PopupMenuItem(
+                                              value: 1,
+                                              child: ListTile(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          UpdateFile(
+                                                              docId:
+                                                                  document.id,
+                                                              existingData:
+                                                                  data),
+                                                    ),
+                                                  );
+                                                },
+                                                leading: const Icon(Icons.edit),
+                                                title: const Text('Edit'),
+                                              ),
+                                            ),
+                                            PopupMenuItem(
+                                              value: 2,
+                                              child: ListTile(
+                                                onTap: () {
+                                                  value.deleteFile(
+                                                      docId: document.id,
+                                                      context: context);
+                                                },
+                                                leading: const Icon(
+                                                    Icons.delete_outline),
+                                                title: const Text('Delete'),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ],
                                 ),
-                              );
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: AppTheme.greyColor),
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      const SizedBox(
-                                        height: 25,
-                                        width: 25,
-                                        child: Image(
-                                          image: AssetImage(
-                                              Constants.jobSearchImage),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(data['department'].toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge!
-                                              .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              )),
-                                    ],
-                                  ),
-                                  Consumer<UploadProvider>(
-                                    builder: (BuildContext context,
-                                        UploadProvider value, Widget? child) {
-                                      return PopupMenuButton(
-                                        color: AppTheme.greyColor,
-                                        elevation: 4,
-                                        padding: EdgeInsets.zero,
-                                        shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(12))),
-                                        icon: const Icon(
-                                          Icons.more_vert,
-                                        ),
-                                        itemBuilder: (context) => [
-                                          PopupMenuItem(
-                                            value: 1,
-                                            child: ListTile(
-                                              onTap: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UpdateFile(
-                                                            docId: document.id,
-                                                            existingData: data),
-                                                  ),
-                                                );
-                                              },
-                                              leading: const Icon(Icons.edit),
-                                              title: const Text('Edit'),
-                                            ),
-                                          ),
-                                          PopupMenuItem(
-                                            value: 2,
-                                            child: ListTile(
-                                              onTap: () {
-                                                value.deleteFile(
-                                                    docId: document.id,
-                                                    context: context);
-                                              },
-                                              leading: const Icon(
-                                                  Icons.delete_outline),
-                                              title: const Text('Delete'),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ],
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ).toList(),
-                );
-              },
-            ),
-          ),
-        
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AddFile(),
+                        );
+                      },
+                    ).toList(),
+                  );
+                },
               ),
-            );
-          }),floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
-    );
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddFile(),
+                ),
+              );
+            }),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
   }
-
 }

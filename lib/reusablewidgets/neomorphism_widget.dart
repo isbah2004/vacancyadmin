@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 class NeomorphicWidget extends StatelessWidget {
   final Widget child;
   final VoidCallback? onTap;
-  final bool? elevation;
-
   const NeomorphicWidget({
     super.key,
     required this.child,
-    this.onTap, this.elevation,
+    this.onTap
   });
 
   @override

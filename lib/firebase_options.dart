@@ -50,21 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAFCDKG9szBe5s1XIqJpTVJ4wQx6Y103Uo',
-    appId: '1:716530752125:android:f4d411ae77f2560bfc2f14',
-    messagingSenderId: '716530752125',
-    projectId: 'exam-app-dfbb9',
-    storageBucket: 'exam-app-dfbb9.appspot.com',
+    apiKey: 'AIzaSyCcUUZUelLKZAUCg7PGyQa39nrAPWlr-tk',
+    appId: '1:84909805505:android:229ab14fcfbe1c25082940',
+    messagingSenderId: '84909805505',
+    projectId: 'lcpl-manpower-and-vacancy',
+    storageBucket: 'lcpl-manpower-and-vacancy.appspot.com',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCkxdmbxtRmD3eR5oX28QbegJPsYZR1RW8',
-    appId: '1:716530752125:web:26654c7c9c11cf2cfc2f14',
-    messagingSenderId: '716530752125',
-    projectId: 'exam-app-dfbb9',
-    authDomain: 'exam-app-dfbb9.firebaseapp.com',
-    storageBucket: 'exam-app-dfbb9.appspot.com',
-    measurementId: 'G-PQ6WD7HDEW',
+    apiKey: 'AIzaSyCZmE5OVxXUpt5ZZecST4zFt6u733gfRLU',
+    appId: '1:84909805505:web:6bd2f911cb5e1d43082940',
+    messagingSenderId: '84909805505',
+    projectId: 'lcpl-manpower-and-vacancy',
+    authDomain: 'lcpl-manpower-and-vacancy.firebaseapp.com',
+    storageBucket: 'lcpl-manpower-and-vacancy.appspot.com',
+    measurementId: 'G-4N57XHHZE7',
   );
 
 }

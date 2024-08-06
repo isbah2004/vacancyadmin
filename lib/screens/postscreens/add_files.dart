@@ -22,15 +22,17 @@ class _AddFileState extends State<AddFile> {
       TextEditingController();
   final TextEditingController vacancyController = TextEditingController();
 
-  final TextEditingController detailController = TextEditingController();
   final TextEditingController numberController = TextEditingController();
   final FocusNode departmentFocusNode = FocusNode();
   final FocusNode approvedNumberFocusNode = FocusNode();
   final FocusNode manpowerNumberFocusNode = FocusNode();
   final FocusNode vacancyFocusNode = FocusNode();
-  final FocusNode detailFocusNode = FocusNode();
   final FocusNode numberFocusNode = FocusNode();
- 
+  final FocusNode nameFocusNode = FocusNode();
+  final FocusNode dateFocusNode = FocusNode();
+  final FocusNode gradeFocusNode = FocusNode();
+  final FocusNode designationFocusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -56,14 +58,16 @@ class _AddFileState extends State<AddFile> {
     approvedNumberController.dispose();
     manpowerNumberController.dispose();
     vacancyController.dispose();
-    detailController.dispose();
     numberController.dispose();
     departmentFocusNode.dispose();
     approvedNumberFocusNode.dispose();
     manpowerNumberFocusNode.dispose();
     vacancyFocusNode.dispose();
-    detailFocusNode.dispose();
     numberFocusNode.dispose();
+    nameFocusNode.dispose();
+    dateFocusNode.dispose();
+    designationFocusNode.dispose();
+    gradeFocusNode.dispose();
     super.dispose();
   }
 
@@ -105,8 +109,9 @@ class _AddFileState extends State<AddFile> {
             ),
             ReusableTextField(
               hintText: 'Approved Numbers',
-              controller: approvedNumberController,  keyboardType: TextInputType.number,
-     inputFormatter: [FilteringTextInputFormatter.digitsOnly],
+              controller: approvedNumberController,
+              keyboardType: TextInputType.number,
+              inputFormatter: [FilteringTextInputFormatter.digitsOnly],
               focusNode: approvedNumberFocusNode,
               onFieldSubmitted: (value) {
                 Utils.changeFocus(
@@ -121,8 +126,8 @@ class _AddFileState extends State<AddFile> {
             ReusableTextField(
               hintText: 'Manpower Numbers',
               controller: manpowerNumberController,
-                keyboardType: TextInputType.number,
-     inputFormatter: [FilteringTextInputFormatter.digitsOnly],
+              keyboardType: TextInputType.number,
+              inputFormatter: [FilteringTextInputFormatter.digitsOnly],
               focusNode: manpowerNumberFocusNode,
               onFieldSubmitted: (value) {
                 Utils.changeFocus(
@@ -137,40 +142,24 @@ class _AddFileState extends State<AddFile> {
             ReusableTextField(
               hintText: 'Vacancy',
               controller: vacancyController,
-            keyboardType: TextInputType.number,
-     inputFormatter: [FilteringTextInputFormatter.digitsOnly],
+              keyboardType: TextInputType.number,
+              inputFormatter: [FilteringTextInputFormatter.digitsOnly],
               focusNode: vacancyFocusNode,
               onFieldSubmitted: (value) {
                 Utils.changeFocus(
                     currentFocus: vacancyFocusNode,
-                    nextFocus: detailFocusNode,
-                    context: context);
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ReusableTextField(
-              maxLines: null,
-              hintText: 'Details',
-              controller: detailController,
-              keyboardType: TextInputType.text,
-              focusNode: detailFocusNode,
-              onFieldSubmitted: (value) {
-                Utils.changeFocus(
-                    currentFocus: detailFocusNode,
                     nextFocus: numberFocusNode,
                     context: context);
               },
             ),
-            const SizedBox(
+           const SizedBox(
               height: 20,
             ),
             ReusableTextField(
               hintText: 'Number',
               controller: numberController,
-          keyboardType: TextInputType.number,
-     inputFormatter: [FilteringTextInputFormatter.digitsOnly],
+              keyboardType: TextInputType.number,
+              inputFormatter: [FilteringTextInputFormatter.digitsOnly],
               focusNode: numberFocusNode,
             ),
             const SizedBox(
@@ -188,7 +177,6 @@ class _AddFileState extends State<AddFile> {
                           approvedNumberController: approvedNumberController,
                           manpowerNumberController: manpowerNumberController,
                           vacancyController: vacancyController,
-                          detailController: detailController,
                           numberController: numberController);
                     },
                     loading: value.loading);
