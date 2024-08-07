@@ -95,12 +95,12 @@ class _DetailScreenState extends State<DetailScreen> {
                     );
                   }
 
-                  if (snapshot.hasError) {
+               else   if (snapshot.hasError) {
                     Utils.toastMessage(
                         message: snapshot.error.toString(), context: context);
                   }
 
-                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+         else       if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                     return const SizedBox();
                   }
 

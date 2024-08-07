@@ -36,6 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 image: AssetImage(Constants.logo),
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
               constraints: const BoxConstraints(maxWidth: 600),
               child: Consumer2<VisibilityProvider, AuthProvider>(

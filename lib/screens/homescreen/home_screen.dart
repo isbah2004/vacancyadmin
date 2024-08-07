@@ -67,14 +67,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     );
-                  } else if (snapshot.connectionState ==
+                  }  if (snapshot.connectionState ==
                       ConnectionState.waiting) {
                     return Padding(
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height / 2.6),
                       child: const Center(child: CircularProgressIndicator()),
                     );
-                  } else if (snapshot.data == null ||
+                  }  if (snapshot.data == null ||
                       snapshot.data!.docs.isEmpty) {
                     return Center(
                       child: Text(
