@@ -4,7 +4,6 @@ import 'package:vacancy_admin/reusablewidgets/multicolor_progress_indicator.dart
 import 'package:vacancy_admin/reusablewidgets/neomorphism_widget.dart';
 import 'package:vacancy_admin/screens/detailscreen/detail_screen.dart';
 import 'package:vacancy_admin/theme/theme.dart';
-import 'package:vacancy_admin/utils/utils.dart';
 
 class SummaryScreen extends StatelessWidget {
   const SummaryScreen({super.key});
@@ -29,6 +28,36 @@ class SummaryScreen extends StatelessWidget {
       body: StreamBuilder<QuerySnapshot>(
         stream: fireStoreStream,
         builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: MulticolorProgressIndicator(),
+            );
+          }
+
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                'Something went wrong',
+                style: Theme.of(context)
+                    .textTheme
+                    .displayLarge!
+                    .copyWith(fontWeight: FontWeight.normal),
+              ),
+            );
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Center(
+              child: Text(
+                'No data available',
+                style: Theme.of(context)
+                    .textTheme
+                    .displayLarge!
+                    .copyWith(fontWeight: FontWeight.normal),
+              ),
+            );
+          }
+
           var data = snapshot.data!.docs;
 
           int totalApproved = data.fold(
@@ -43,35 +72,6 @@ class SummaryScreen extends StatelessWidget {
               0,
               (totalVacantData, doc) =>
                   totalVacantData + (int.parse(doc['vacancy'])));
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: MulticolorProgressIndicator(),
-            );
-          }
-
-          if (snapshot.hasError) {
-            Center(
-              child: Text(
-                'Something went wrong',
-                style: Theme.of(context)
-                    .textTheme
-                    .displayLarge!
-                    .copyWith(fontWeight: FontWeight.normal),
-              ),
-            );
-          }
-
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            Center(
-              child: Text(
-                'No data available',
-                style: Theme.of(context)
-                    .textTheme
-                    .displayLarge!
-                    .copyWith(fontWeight: FontWeight.normal),
-              ),
-            );
-          }
 
           return LayoutBuilder(
             builder: (context, constraints) {
@@ -94,7 +94,8 @@ class SummaryScreen extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: NeomorphicWidget(
-                            child: DataTable(showCheckboxColumn: false,
+                            child: DataTable(
+                              showCheckboxColumn: false,
                               border: TableBorder.all(
                                 color: AppTheme.lightGreyColor,
                                 borderRadius: BorderRadius.circular(20),
@@ -140,23 +141,26 @@ class SummaryScreen extends StatelessWidget {
                               rows: [
                                 ...data.map((doc) {
                                   return DataRow(
-                                    onSelectChanged: (selected) {if(selected ?? false){
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailScreen(
-                                                      department:
-                                                          doc['department'],
-                                                      approvedNumbers: doc[
-                                                          'approved_numbers'],
-                                                      manpowerNumbers: doc[
-                                                          'manpower_numbers'],
-                                                      vacancy: doc['vacancy'],
-                                                      number: doc['number'],
-                                                      snapshot: snapshot,
-                                                      docId: doc.id)));
-                                }    },
+                                    onSelectChanged: (selected) {
+                                      if (selected ?? false) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailScreen(
+                                                        department: doc[
+                                                            'department'],
+                                                        approvedNumbers: doc[
+                                                            'approved_numbers'],
+                                                        manpowerNumbers: doc[
+                                                            'manpower_numbers'],
+                                                        vacancy:
+                                                            doc['vacancy'],
+                                                        number: doc['number'],
+                                                        snapshot: snapshot,
+                                                        docId: doc.id)));
+                                      }
+                                    },
                                     cells: [
                                       DataCell(FittedBox(
                                           child: Text(

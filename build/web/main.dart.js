@@ -27773,10 +27773,10 @@ any:function any(a){this.a=a},
 anx:function anx(){},
 v0:function v0(a){this.a=a},
 adG:function adG(){},
-adC:function adC(){},
 adD:function adD(){},
 adE:function adE(){},
-adF:function adF(a,b,c,d,e){var _=this
+adF:function adF(){},
+adC:function adC(a,b,c,d,e){var _=this
 _.a=a
 _.b=b
 _.c=c
@@ -89955,7 +89955,7 @@ s.C$=$.af()
 s.p$=0
 this.aE()},
 J(a){var s=null
-return A.qf(s,s,A.dY(A.ec(A.b([B.nD,B.F_,B.Z,A.cG(s,new A.xY(new A.al3(this),s,s,t.Cv),B.q,s,B.mm,s,s,s,s,s,s,s,s,s),B.Pm,A.cG(s,A.ms(new A.al4(this),t.W0),B.q,s,B.mm,s,s,s,s,s,s,s,s,s),B.EY],t.p),B.a5,B.kz,B.ac),s,s),s,s)}}
+return A.qf(s,s,A.dY(A.ec(A.b([B.nD,B.F0,B.Z,A.cG(s,new A.xY(new A.al3(this),s,s,t.Cv),B.q,s,B.mm,s,s,s,s,s,s,s,s,s),B.Pm,A.cG(s,A.ms(new A.al4(this),t.W0),B.q,s,B.mm,s,s,s,s,s,s,s,s,s),B.EY],t.p),B.a5,B.kz,B.ac),s,s),s,s)}}
 A.al3.prototype={
 $4(a,b,c,d){var s=null,r=this.a,q=b.a
 return A.eh(r.d,s,"Password",s,B.QH,q,new A.al1(r,c,a),B.Ga,A.iv(s,A.L3(q?B.G4:B.G5,s,s),B.ab,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,new A.al2(b),s,s,s,s,s,s))},
@@ -90396,7 +90396,7 @@ k===$&&A.a()
 k=A.eh(k,p.w,"Name",o,B.c2,o,new A.aoR(p,a),o,o)
 s=p.e
 s===$&&A.a()
-s=A.eh(s,p.x,"Resignation Date",o,B.c2,o,new A.aoS(p,a),o,o)
+s=A.eh(s,p.x,"Last Working Day",o,B.c2,o,new A.aoS(p,a),o,o)
 r=p.f
 r===$&&A.a()
 r=A.eh(r,p.y,"Designation",o,B.c2,o,new A.aoT(p,a),o,o)
@@ -90465,23 +90465,24 @@ q=A.Kw(new A.dK(p))
 s=A.ka(q,q.gj3().fR("vacancies")).Cs()
 return A.qf(A.ru(r,B.ba,!0,A.br("Summary of Manpower and Vacancies",r,r,r,r,A.U(a).p2.y.ja(B.av,25,B.am),r,r)),r,A.ats(new A.adG(),s,t.l7),r,r)}}
 A.adG.prototype={
-$2(a,b){var s=null,r=b.b,q=r.gkX(),p=B.b.nZ(q,0,new A.adC()),o=B.b.nZ(q,0,new A.adD()),n=B.b.nZ(q,0,new A.adE())
+$2(a,b){var s,r,q=null
 if(b.a===B.e9)return B.mO
-if(b.c!=null)A.dY(A.br("Something went wrong",s,s,s,s,A.U(a).p2.a.u1(B.x),s,s),s,s)
-r=r.gkX().length
-if(r===0)A.dY(A.br("No data available",s,s,s,s,A.U(a).p2.a.u1(B.x),s,s),s,s)
-return new A.tN(new A.adF(q,b,p,o,n),s)},
+if(b.c!=null)return A.dY(A.br("Something went wrong",q,q,q,q,A.U(a).p2.a.u1(B.x),q,q),q,q)
+s=b.b
+if(s==null||s.gkX().length===0)return A.dY(A.br("No data available",q,q,q,q,A.U(a).p2.a.u1(B.x),q,q),q,q)
+r=s.gkX()
+return new A.tN(new A.adC(r,b,B.b.nZ(r,0,new A.adD()),B.b.nZ(r,0,new A.adE()),B.b.nZ(r,0,new A.adF())),q)},
 $S:189}
-A.adC.prototype={
+A.adD.prototype={
 $2(a,b){return a+A.fW(A.dl(b.b.bn("approved_numbers"),b.a),null)},
 $S:75}
-A.adD.prototype={
+A.adE.prototype={
 $2(a,b){return a+A.fW(A.dl(b.b.bn("manpower_numbers"),b.a),null)},
 $S:75}
-A.adE.prototype={
+A.adF.prototype={
 $2(a,b){return a+A.fW(A.dl(b.b.bn("vacancy"),b.a),null)},
 $S:75}
-A.adF.prototype={
+A.adC.prototype={
 $2(a,b){var s,r,q,p,o,n,m,l=this,k=null,j=b.b<600,i=j?13:15,h=j?13:15,g=j?10:20
 j=A.eJ(15)
 s=A.eJ(20)
@@ -92399,7 +92400,7 @@ p(A.Ji,[A.Zk,A.acY,A.acZ,A.a4A,A.a4B,A.a8_,A.a81,A.a8k,A.a8l,A.a_i,A.a_B,A.a4l,A
 p(A.aiU,[A.xw,A.lc,A.pI,A.rC,A.zt,A.pQ,A.oG,A.xk,A.DI,A.Lq,A.hU,A.qd,A.Z1,A.p7,A.C5,A.yA,A.mU,A.tp,A.DL,A.S3,A.v6,A.Dc,A.by,A.dk,A.Jc,A.MC,A.zE,A.a6o,A.Cz,A.OM,A.MB,A.os,A.rJ,A.ZT,A.oX,A.ij,A.xj,A.a0k,A.Px,A.Dj,A.lh,A.jP,A.ue,A.to,A.n9,A.lA,A.nC,A.CO,A.P6,A.nD,A.CL,A.IO,A.ZW,A.Pd,A.IR,A.a3L,A.a3S,A.a3K,A.tl,A.yL,A.t6,A.uV,A.a6S,A.uM,A.pR,A.rq,A.hA,A.vx,A.Ip,A.WN,A.JB,A.qQ,A.ye,A.jo,A.dP,A.KN,A.qS,A.Eg,A.RJ,A.K9,A.LV,A.z9,A.Eh,A.aeV,A.vB,A.a5G,A.xz,A.a_9,A.jm,A.JD,A.Ev,A.aka,A.nR,A.yX,A.ep,A.pv,A.j6,A.n_,A.afJ,A.fR,A.Ck,A.wu,A.pC,A.abG,A.Bf,A.Iz,A.Pt,A.rx,A.IK,A.IQ,A.IN,A.tz,A.CU,A.aeQ,A.Cs,A.us,A.qV,A.Kz,A.LD,A.mZ,A.oE,A.zf,A.JJ,A.nu,A.C0,A.v9,A.uH,A.C1,A.CY,A.KS,A.OH,A.OS,A.IV,A.BS,A.qg,A.a0s,A.It,A.tM,A.Ll,A.CA,A.pr,A.hf,A.OP,A.LL,A.Oz,A.OA,A.fl,A.ae4,A.yW,A.i0,A.Pl,A.rS,A.hF,A.h1,A.Es,A.jC,A.Pn,A.mF,A.a43,A.lF,A.Pi,A.ks,A.anz,A.vI,A.tv,A.Md,A.e9,A.M1,A.GP,A.uz,A.eD,A.G2,A.a8o,A.vQ,A.W7,A.wp,A.NM,A.NZ,A.qk,A.O1,A.O_,A.uE,A.zU,A.OB,A.rO,A.bM])
 q(A.a_l,A.Vl)
 p(A.J5,[A.J4,A.xI,A.rF])
-p(A.Jj,[A.a5v,A.aqx,A.aqr,A.a8J,A.aqY,A.aqK,A.a6y,A.a6u,A.a2L,A.adn,A.adc,A.apJ,A.arm,A.a5A,A.a0i,A.a_n,A.a_p,A.a02,A.a9j,A.a6g,A.aqU,A.apz,A.aqj,A.a4J,A.a4F,A.ajB,A.adr,A.amT,A.a6P,A.a78,A.adg,A.adf,A.akP,A.a8d,A.aoY,A.afj,A.afk,A.afl,A.aoX,A.aoW,A.apN,A.aqP,A.aqQ,A.aja,A.ahy,A.ahx,A.ahw,A.a1h,A.a1g,A.aqt,A.ar3,A.a0v,A.a2x,A.a2w,A.a3u,A.a09,A.amk,A.ame,A.a97,A.a79,A.al6,A.amt,A.ams,A.aic,A.apt,A.amp,A.amo,A.amm,A.amv,A.apn,A.apo,A.am5,A.aht,A.aby,A.ana,A.aob,A.aoc,A.apx,A.aow,A.amF,A.aeR,A.ahB,A.a5L,A.a5S,A.a5P,A.Zp,A.a7R,A.ab_,A.aa0,A.aa8,A.aa5,A.aa4,A.aad,A.aab,A.aac,A.aaa,A.a7H,A.a8O,A.a8N,A.a8P,A.a8Q,A.aag,A.aaA,A.aaz,A.aaD,A.aaE,A.aaW,A.aa9,A.aaf,A.aae,A.aaF,A.aaU,A.aaV,A.abB,A.anm,A.acx,A.acy,A.acf,A.a_f,A.aiq,A.adm,A.anF,A.ajv,A.a1J,A.a1X,A.a20,A.a0V,A.a0X,A.a0W,A.a0Y,A.a0Z,A.a0R,A.a0U,A.amb,A.am8,A.a9U,A.a9V,A.ajo,A.a2t,A.a5j,A.ajP,A.a5g,A.ajT,A.aly,A.amI,A.anI,A.alN,A.apv,A.apw,A.als,A.alr,A.alp,A.abS,A.anh,A.anf,A.ang,A.abW,A.acN,A.acQ,A.amB,A.amA,A.afA,A.amz,A.amy,A.ZE,A.alx,A.aiK,A.aiJ,A.ak4,A.adG,A.adC,A.adD,A.adE,A.adF])
+p(A.Jj,[A.a5v,A.aqx,A.aqr,A.a8J,A.aqY,A.aqK,A.a6y,A.a6u,A.a2L,A.adn,A.adc,A.apJ,A.arm,A.a5A,A.a0i,A.a_n,A.a_p,A.a02,A.a9j,A.a6g,A.aqU,A.apz,A.aqj,A.a4J,A.a4F,A.ajB,A.adr,A.amT,A.a6P,A.a78,A.adg,A.adf,A.akP,A.a8d,A.aoY,A.afj,A.afk,A.afl,A.aoX,A.aoW,A.apN,A.aqP,A.aqQ,A.aja,A.ahy,A.ahx,A.ahw,A.a1h,A.a1g,A.aqt,A.ar3,A.a0v,A.a2x,A.a2w,A.a3u,A.a09,A.amk,A.ame,A.a97,A.a79,A.al6,A.amt,A.ams,A.aic,A.apt,A.amp,A.amo,A.amm,A.amv,A.apn,A.apo,A.am5,A.aht,A.aby,A.ana,A.aob,A.aoc,A.apx,A.aow,A.amF,A.aeR,A.ahB,A.a5L,A.a5S,A.a5P,A.Zp,A.a7R,A.ab_,A.aa0,A.aa8,A.aa5,A.aa4,A.aad,A.aab,A.aac,A.aaa,A.a7H,A.a8O,A.a8N,A.a8P,A.a8Q,A.aag,A.aaA,A.aaz,A.aaD,A.aaE,A.aaW,A.aa9,A.aaf,A.aae,A.aaF,A.aaU,A.aaV,A.abB,A.anm,A.acx,A.acy,A.acf,A.a_f,A.aiq,A.adm,A.anF,A.ajv,A.a1J,A.a1X,A.a20,A.a0V,A.a0X,A.a0W,A.a0Y,A.a0Z,A.a0R,A.a0U,A.amb,A.am8,A.a9U,A.a9V,A.ajo,A.a2t,A.a5j,A.ajP,A.a5g,A.ajT,A.aly,A.amI,A.anI,A.alN,A.apv,A.apw,A.als,A.alr,A.alp,A.abS,A.anh,A.anf,A.ang,A.abW,A.acN,A.acQ,A.amB,A.amA,A.afA,A.amz,A.amy,A.ZE,A.alx,A.aiK,A.aiJ,A.ak4,A.adG,A.adD,A.adE,A.adF,A.adC])
 p(A.q,[A.Ai,A.nO,A.Eb,A.j2,A.ao,A.ey,A.aX,A.fc,A.qx,A.lx,A.Cf,A.kT,A.dS,A.qY,A.PP,A.W8,A.hw,A.pt,A.yp,A.eY,A.aR,A.kX,A.XC])
 p(A.J7,[A.DJ,A.DK])
 q(A.xG,A.IS)
@@ -94071,8 +94072,8 @@ B.jB=new A.JB(1,"elevated")
 B.DN=new A.a0k(1,"latency")
 B.am=new A.fd(6,700)
 B.d0=new A.v(!0,null,null,null,null,null,null,B.am,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.Uf=new A.f_("Total",null,B.d0,null,null,null,null,null,null,null)
-B.Ff=new A.h7(B.Uf,null)
+B.Ue=new A.f_("Total",null,B.d0,null,null,null,null,null,null,null)
+B.Ff=new A.h7(B.Ue,null)
 B.DO=new A.y8(B.Ff)
 B.DX=new A.y9(null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.cz=new A.jm(0,"calendar")
@@ -94214,7 +94215,7 @@ B.AD=new A.oq("assets/Lotte_Chemicals_Pak_Logo.png")
 B.jV=new A.oX(1,"low")
 B.eq=new A.tz(3,"noRepeat")
 B.o6=new A.ph(B.AD,null)
-B.F_=new A.fz(4,B.bh,B.o6,null)
+B.F0=new A.fz(4,B.bh,B.o6,null)
 B.F6=new A.yJ(null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.fW=new A.kL(!1,!1,!1,!1)
 B.fX=new A.kL(!1,!1,!1,!0)
@@ -94531,19 +94532,19 @@ B.MJ=new A.pR(2,"set")
 B.MK=new A.pR(3,"deleteType")
 B.I_=A.b(s([B.MH,B.MI,B.MJ,B.MK]),A.ag("r<pR>"))
 B.I0=A.b(s(["pointerdown","pointermove","pointerleave","pointerup","pointercancel","touchstart","touchend","touchmove","touchcancel","mousedown","mousemove","mouseleave","mouseup","keyup","keydown"]),t.s)
-B.Ub=new A.f_("Name",null,null,null,null,null,null,null,null,null)
-B.Fn=new A.h7(B.Ub,null)
-B.DQ=new A.im(B.Fn)
-B.Ua=new A.f_("Resignation Date",null,null,null,null,null,null,null,null,null)
-B.Fh=new A.h7(B.Ua,null)
-B.F3=new A.fz(1,B.bh,B.Fh,null)
-B.DV=new A.im(B.F3)
-B.Uc=new A.f_("Designation",null,null,null,null,null,null,null,null,null)
-B.Fk=new A.h7(B.Uc,null)
-B.DT=new A.im(B.Fk)
-B.Ue=new A.f_("Grade",null,null,null,null,null,null,null,null,null)
-B.Fl=new A.h7(B.Ue,null)
-B.F4=new A.fz(1,B.bh,B.Fl,null)
+B.Ua=new A.f_("Name",null,null,null,null,null,null,null,null,null)
+B.Fm=new A.h7(B.Ua,null)
+B.DQ=new A.im(B.Fm)
+B.Uf=new A.f_("Last Working Day",null,null,null,null,null,null,null,null,null)
+B.Fn=new A.h7(B.Uf,null)
+B.EZ=new A.fz(1,B.bh,B.Fn,null)
+B.DV=new A.im(B.EZ)
+B.Ub=new A.f_("Designation",null,null,null,null,null,null,null,null,null)
+B.Fj=new A.h7(B.Ub,null)
+B.DT=new A.im(B.Fj)
+B.Ud=new A.f_("Grade",null,null,null,null,null,null,null,null,null)
+B.Fk=new A.h7(B.Ud,null)
+B.F4=new A.fz(1,B.bh,B.Fk,null)
 B.DW=new A.im(B.F4)
 B.I6=A.b(s([B.DQ,B.DV,B.DT,B.DW]),t.UR)
 B.Q5=new A.CA(0,"left")
@@ -94633,19 +94634,19 @@ B.uO=new A.h(0,-1)
 B.Lo=new A.h(1,-1)
 B.hu=A.b(s([B.dA,B.Lm,B.eR,B.LH,B.uP,B.LI,B.uO,B.Lo]),t.yv)
 B.Ui=new A.f_("Department",null,null,null,null,null,null,null,null,null)
-B.Fi=new A.h7(B.Ui,null)
-B.DR=new A.im(B.Fi)
-B.Ud=new A.f_("Approved",null,null,null,null,null,null,null,null,null)
-B.Fm=new A.h7(B.Ud,null)
-B.F1=new A.fz(1,B.bh,B.Fm,null)
-B.DU=new A.im(B.F1)
+B.Fh=new A.h7(B.Ui,null)
+B.DR=new A.im(B.Fh)
+B.Uc=new A.f_("Approved",null,null,null,null,null,null,null,null,null)
+B.Fl=new A.h7(B.Uc,null)
+B.F2=new A.fz(1,B.bh,B.Fl,null)
+B.DU=new A.im(B.F2)
 B.Uh=new A.f_("Current",null,null,null,null,null,null,null,null,null)
 B.Fg=new A.h7(B.Uh,null)
-B.EZ=new A.fz(1,B.bh,B.Fg,null)
-B.DS=new A.im(B.EZ)
+B.F_=new A.fz(1,B.bh,B.Fg,null)
+B.DS=new A.im(B.F_)
 B.Ug=new A.f_("Vacant",null,null,null,null,null,null,null,null,null)
-B.Fj=new A.h7(B.Ug,null)
-B.F5=new A.fz(1,B.bh,B.Fj,null)
+B.Fi=new A.h7(B.Ug,null)
+B.F5=new A.fz(1,B.bh,B.Fi,null)
 B.DP=new A.im(B.F5)
 B.IG=A.b(s([B.DR,B.DU,B.DS,B.DP]),t.UR)
 B.IH=A.b(s(["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]),t.s)
@@ -95786,9 +95787,9 @@ B.co=new A.Pt(1,"down")
 B.Z=new A.eX(null,20,null,null)
 B.AF=new A.oq("assets/MvV.png")
 B.Gv=new A.ph(B.AF,null)
-B.F2=new A.fz(2,B.bh,B.Gv,null)
-B.F0=new A.fz(2,B.bh,B.o6,null)
-B.I5=A.b(s([B.Z,B.F2,B.F0,B.Z,B.uF,B.nD]),t.p)
+B.F3=new A.fz(2,B.bh,B.Gv,null)
+B.F1=new A.fz(2,B.bh,B.o6,null)
+B.I5=A.b(s([B.Z,B.F3,B.F1,B.Z,B.uF,B.nD]),t.p)
 B.Dw=new A.xU(B.X,B.Y,B.ac,B.a5,null,B.co,null,B.I5,null)
 B.Ct=new A.il(B.S,null,null,B.Dw,null)
 B.Nf=new A.uB(null,B.Ct,null,null,null,null)

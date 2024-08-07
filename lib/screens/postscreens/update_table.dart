@@ -72,7 +72,9 @@ class _UpdateTableState extends State<UpdateTable> {
             return IconButton(
               onPressed: () {
                 value.deleteTable(
-                    docId: widget.existingData.id, context: context, collectionName: widget.collectionName);
+                    docId: widget.existingData.id,
+                    context: context,
+                    collectionName: widget.collectionName);
               },
               icon: const Icon(Icons.delete),
             );
@@ -111,7 +113,7 @@ class _UpdateTableState extends State<UpdateTable> {
               height: 20,
             ),
             ReusableTextField(
-              hintText: 'Resignation Date',
+              hintText: 'Last Working Day',
               controller: dateController,
               keyboardType: TextInputType.text,
               focusNode: dateFocusNode,

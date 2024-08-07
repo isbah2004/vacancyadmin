@@ -93,14 +93,10 @@ class _DetailScreenState extends State<DetailScreen> {
                     return const Center(
                       child: MulticolorProgressIndicator(),
                     );
-                  }
-
-               else   if (snapshot.hasError) {
+                  } else if (snapshot.hasError) {
                     Utils.toastMessage(
                         message: snapshot.error.toString(), context: context);
-                  }
-
-         else       if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                     return const SizedBox();
                   }
 
@@ -131,7 +127,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                     child: Consumer<UploadProvider>(
                                       builder: (BuildContext context,
                                           UploadProvider value, Widget? child) {
-                                        return DataTable(showCheckboxColumn: false,
+                                        return DataTable(
+                                          showCheckboxColumn: false,
                                           border: TableBorder.all(
                                             color: AppTheme.lightGreyColor,
                                             borderRadius:
@@ -169,7 +166,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 label: Expanded(
                                                     child: FittedBox(
                                                         child: Text(
-                                                            'Resignation Date')))),
+                                                            'Last Working Day')))),
                                             DataColumn(
                                                 label: FittedBox(
                                                     child:
@@ -182,18 +179,21 @@ class _DetailScreenState extends State<DetailScreen> {
                                           rows: [
                                             ...data.map((doc) {
                                               return DataRow(
-                                                onSelectChanged: (selected) {if(selected??false){
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              UpdateTable(
-                                                                  docId: doc.id,
-                                                                  existingData:
-                                                                      doc,
-                                                                  collectionName:
-                                                                      widget
-                                                                          .department)));}
+                                                onSelectChanged: (selected) {
+                                                  if (selected ?? false) {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                UpdateTable(
+                                                                    docId:
+                                                                        doc.id,
+                                                                    existingData:
+                                                                        doc,
+                                                                    collectionName:
+                                                                        widget
+                                                                            .department)));
+                                                  }
                                                 },
                                                 cells: [
                                                   DataCell(FittedBox(
