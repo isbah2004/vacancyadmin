@@ -131,7 +131,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     child: Consumer<UploadProvider>(
                                       builder: (BuildContext context,
                                           UploadProvider value, Widget? child) {
-                                        return DataTable(
+                                        return DataTable(showCheckboxColumn: false,
                                           border: TableBorder.all(
                                             color: AppTheme.lightGreyColor,
                                             borderRadius:
@@ -171,10 +171,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         child: Text(
                                                             'Resignation Date')))),
                                             DataColumn(
-                                                label: Expanded(
-                                                    child: FittedBox(
-                                                        child: Text(
-                                                            'Designation')))),
+                                                label: FittedBox(
+                                                    child:
+                                                        Text('Designation'))),
                                             DataColumn(
                                                 label: Expanded(
                                                     child: FittedBox(
@@ -183,7 +182,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                           rows: [
                                             ...data.map((doc) {
                                               return DataRow(
-                                                onLongPress: () {
+                                                onSelectChanged: (selected) {if(selected??false){
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
@@ -194,7 +193,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                       doc,
                                                                   collectionName:
                                                                       widget
-                                                                          .department)));
+                                                                          .department)));}
                                                 },
                                                 cells: [
                                                   DataCell(FittedBox(

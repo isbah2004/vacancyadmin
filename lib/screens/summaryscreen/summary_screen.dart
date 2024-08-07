@@ -94,7 +94,7 @@ class SummaryScreen extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: NeomorphicWidget(
-                            child: DataTable(
+                            child: DataTable(showCheckboxColumn: false,
                               border: TableBorder.all(
                                 color: AppTheme.lightGreyColor,
                                 borderRadius: BorderRadius.circular(20),
@@ -140,7 +140,7 @@ class SummaryScreen extends StatelessWidget {
                               rows: [
                                 ...data.map((doc) {
                                   return DataRow(
-                                    onLongPress: () {
+                                    onSelectChanged: (selected) {if(selected ?? false){
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -156,7 +156,7 @@ class SummaryScreen extends StatelessWidget {
                                                       number: doc['number'],
                                                       snapshot: snapshot,
                                                       docId: doc.id)));
-                                    },
+                                }    },
                                     cells: [
                                       DataCell(FittedBox(
                                           child: Text(
